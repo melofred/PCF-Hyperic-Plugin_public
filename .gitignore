@@ -1,3 +1,5 @@
 /target
 *.jardesc
 /bin
+.classpath
+.project
