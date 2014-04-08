@@ -1,7 +1,7 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic.services;
 
 
-public class LoggregatorServer implements CFService{
+public class Ccdb implements CFService{
 
 	private int index;
 	private String ip;

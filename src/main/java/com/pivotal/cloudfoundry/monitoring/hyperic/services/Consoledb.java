@@ -1,7 +1,7 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic.services;
 
 
-public class Dea implements CFService{
+public class Consoledb implements CFService{
 
 	private int index;
 	private String ip;

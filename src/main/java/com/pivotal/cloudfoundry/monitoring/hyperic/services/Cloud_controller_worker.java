@@ -1,7 +1,7 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic.services;
 
 
-public class CloudController implements CFService{
+public class Cloud_controller_worker implements CFService{
 
 	private int index;
 	private String ip;

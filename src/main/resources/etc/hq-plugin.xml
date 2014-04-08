@@ -17,129 +17,315 @@
         <property name="template" value="CF:${alias}" />
         <metric name="Availability" alias="Availability" indicator="true" />
             
-        <service name="DEA">
+        <service name="Dea">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <!--
                 <option name="service.IP" description="Service IP"  optional="false"/>
+                -->
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=DEA,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=dea,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
-			<metric name="Available Disk Ratio" indicator="true" category="THROUGHPUT" alias="available_disk_ratio[stack=lucid64]" />
-			<metric name="Available Mem Ratio" indicator="true" category="THROUGHPUT" alias="available_memory_ratio[stack=lucid64]" />
-			<metric name="Can Stage" indicator="true" category="THROUGHPUT" alias="can_stage[stack=lucid64]" />
-			<metric name="CPU Load (avg)" indicator="true" category="THROUGHPUT" alias="cpu_load_avg[stack=lucid64]"/>
-			<metric name="Mem Free Bytes" indicator="true" category="THROUGHPUT" alias="mem_free_bytes[stack=lucid64]"/>
-			<metric name="Reservable Stagers" indicator="true" category="THROUGHPUT" alias="reservable_stagers[stack=lucid64]"/>
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
             
         </service>
-        <service name="CloudController">
+        <service name="Cloud_controller">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=CloudController,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=cloud_controller,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
-			<metric name="CPU Load (avg)" indicator="true" category="THROUGHPUT" alias="cpu_load_avg"/>
-			<metric name="Mem Free Bytes" indicator="true" category="THROUGHPUT" alias="mem_free_bytes"/>
-			<metric name="Total Users" indicator="true" category="THROUGHPUT" alias="total_users"/>
-			<metric name="Requests Completed" indicator="true" category="THROUGHPUT" alias="cc.requests.completed"/>
-			<metric name="Requests Outstanding" indicator="true" category="THROUGHPUT" alias="cc.requests.outstanding"/>
-			<metric name="Log Count [fatal]" indicator="true" category="THROUGHPUT" alias="log_count[level=fatal]"/>
-            <metric name="Log Count [error]" indicator="true" category="THROUGHPUT" alias="log_count[level=error]"/>
-            <metric name="Log Count [warn]" indicator="true" category="THROUGHPUT" alias="log_count[level=warn]"/>
-               
+	          
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
             
         </service>        
 
-        <service name="HM9000">
+        <service name="Health_manager">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=HM9000,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=health_manager,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
-            
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
          
         </service>     
-        <service name="LoggregatorDeaAgent">
+ 
+        <service name="Ccdb">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorDeaAgent,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=ccdb,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			<metric name="Disk Persistent Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.percent" />
+			<metric name="Disk Persistent INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+         
+        </service>             
+        
+        <service name="Consoledb">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=consoledb,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			<metric name="Disk Persistent Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.percent" />
+			<metric name="Disk Persistent INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+         
+        </service>             
+                
+        <service name="Loggregator">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=loggregator,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
            
-         </service>     
-        
-        <service name="LoggregatorServer">
-            <config>
-                <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
-            </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorServer,index=%service.ID%,ip=%service.IP%:${alias}" />
-            <metric name="Availability" indicator="true" />
-            
-			<metric name="Received Message Count" indicator="true" category="THROUGHPUT" alias="LoggregatorServer.agentListener.receivedMessageCount" />
-			<metric name="Current Buffer" indicator="true" category="THROUGHPUT" alias="LoggregatorServer.agentListener.currentBufferCount" />
-            
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+         
         </service>
         
-        <service name="LoggregatorTrafficcontroller">
+        <service name="Loggregator_trafficcontroller">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorTrafficcontroller,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=loggregator_trafficcontroller,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
-          
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+                   
         </service>        
         <service name="Router">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=Router,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=router,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
-            
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+                     
            
         </service>   
-        <service name="collector">
-            <config>
-                <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
-            </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=Saml_login,index=%service.ID%,ip=null:${alias}" />
-            <metric name="Availability" indicator="true" />
-            
-            
-        </service>     
-        
+ 
         
              
         <service name="Saml_login">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=Saml_login,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=saml_login,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
-	           
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+         	           
         </service>     
         <service name="Uaa">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <option name="service.IP" description="Service IP"  optional="false"/>
             </config>
-            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=uaa,index=%service.ID%,ip=%service.IP%:${alias}" />
+            <property name="template" value="org.cloudfoundry:deployment=null,job=uaa,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
             
-            
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+                     
         </service>                       
+
+      <service name="Uaadb">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=uaadb,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			<metric name="Disk Persistent Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.percent" />
+			<metric name="Disk Persistent INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.persistent.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="sys.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="sys.swap.kb"/>
+           
+         
+        </service>             
+                
                            
         <help>
             This is a HTML help piece that will be displayed to the user on the server configuration page to help him with the configuration of the resource or the configuration of the product if is needed.

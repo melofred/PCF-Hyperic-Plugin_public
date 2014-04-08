@@ -1,7 +1,7 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic.services;
 
 
-public class HM9000 implements CFService{
+public class Uaadb implements CFService{
 
 	private int index;
 	private String ip;

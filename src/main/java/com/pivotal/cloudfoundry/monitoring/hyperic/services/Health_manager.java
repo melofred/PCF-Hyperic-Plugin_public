@@ -1,7 +1,7 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic.services;
 
 
-public class LoggregatorTrafficcontroller implements CFService{
+public class Health_manager implements CFService{
 
 	private int index;
 	private String ip;
