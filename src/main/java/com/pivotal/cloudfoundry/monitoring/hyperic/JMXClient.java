@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
@@ -21,13 +20,15 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.pivotal.cloudfoundry.monitoring.hyperic.services.CFService;
 
 public class JMXClient {
 
 	MBeanServerConnection conn;
-    private static Logger log = Logger.getLogger(JMXClient.class.getName());
+    private static Log log = LogFactory.getLog(JMXClient.class);
 	private static JMXClient instance = null;
 	
     private JMXClient(){
@@ -81,9 +82,9 @@ public class JMXClient {
 		List<CFService> cfServices = new ArrayList<CFService>();
 		
     	try{
-	    	log.info("Querying CF available services... using query: org.cloudfoundry:deployment=null,job=*,index=*,*");
+	    	log.info("Querying CF available services... using query: org.cloudfoundry:deployment=null,job=*,index=*,ip=null");
 
-    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=null,job=*,index=*,*"), null)).iterator();
+    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=null,job=*,index=*,ip=null"), null)).iterator();
     		while (names.hasNext()){
     			ObjectName obj = names.next();
     			
@@ -94,19 +95,18 @@ public class JMXClient {
     			try{
 	    			CFService cfService = (CFService) Class.forName(CFService.class.getPackage().getName()+"."+serviceKindClassname).newInstance();    			
 	    			cfService.setIndex(Integer.parseInt(obj.getKeyProperty("index")));
-	    			cfService.setIp(obj.getKeyProperty("ip"));    			
-	    	    	log.info("Found CloudFoundry service: "+serviceKind+" "+cfService.getIndex());    			
+	    			log.info("Found CloudFoundry service: "+serviceKind+" id: "+cfService.getIndex());    			
 	    			cfServices.add(cfService);
     			}
     			catch(ClassNotFoundException e){
-    				log.warning("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
+    				log.warn("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
     				System.out.println("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
     			}
     		}
     		return cfServices;
     	}
 		catch(Exception e){
-			log.severe("ERROR while getting CF Services using JMX: "+e.getMessage());
+			log.error("ERROR while getting CF Services using JMX: "+e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
@@ -168,7 +168,7 @@ public class JMXClient {
                 echo("\tService = " + svc.getClass().getSimpleName()+" "+svc.getIndex()+" : "+svc.getIp());
             }			        
             
- //           echo("Property value for org.cloudfoundry:deployment=untitled_dev,job=Dea,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"+client.getPropertyValue("org.cloudfoundry:deployment=untitled_dev,job=Dea,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"));
+            echo("Property value for org.cloudfoundry:deployment=null,job=dea,index=1,ip=null:system.disk.system.percent"+client.getPropertyValue("org.cloudfoundry:deployment=null,job=dea,index=1,ip=null:system.disk.system.percent"));
             
 			
 		} catch (Exception e) {

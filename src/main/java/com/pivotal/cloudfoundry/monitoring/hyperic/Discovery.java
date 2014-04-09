@@ -4,8 +4,9 @@ package com.pivotal.cloudfoundry.monitoring.hyperic;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hyperic.hq.product.AutoServerDetector;
 import org.hyperic.hq.product.PluginException;
 import org.hyperic.hq.product.ServerDetector;
@@ -18,7 +19,7 @@ import com.pivotal.cloudfoundry.monitoring.hyperic.services.CFService;
 
 public class Discovery extends ServerDetector implements AutoServerDetector {
 
-    private static Logger log = Logger.getLogger(Discovery.class.getName());
+    private static Log log = LogFactory.getLog(Discovery.class);
 
     public List getServerResources(ConfigResponse platformConfig) throws PluginException {
         
@@ -31,7 +32,7 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
             ServerResource server = createServerResource("Remote PCF");
             server.setName(server.getName());
             ConfigResponse productConfig = new ConfigResponse();
-            productConfig.setValue("process.ID", i);
+           // productConfig.setValue("process.ID", i);
             setProductConfig(server, productConfig);
             setMeasurementConfig(server, new ConfigResponse());
             servers.add(server);
@@ -57,7 +58,7 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
     	//password="password";
     	
     	if (jmxURL==null || username==null || password==null){
-    		log.warning("JMX conn parameters are null");
+    		log.warn("JMX conn parameters are null");
     		serverConfig.setValue("Availability", false);
 			return new ArrayList();
     	}
@@ -92,10 +93,10 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
             service.setName(cfService.getClass().getSimpleName() + " " + cfService.getIndex());
             ConfigResponse productConfig = new ConfigResponse();
             productConfig.setValue("service.ID", cfService.getIndex());
-            productConfig.setValue("service.IP", cfService.getIp());
             setProductConfig(service, productConfig);
             setMeasurementConfig(service, new ConfigResponse());
             services.add(service);    		
+            log.info("Added service: "+service.getType()+" service.ID "+cfService.getIndex());
     	}
     	
     	log.info("Returning services #: "+services.size());
