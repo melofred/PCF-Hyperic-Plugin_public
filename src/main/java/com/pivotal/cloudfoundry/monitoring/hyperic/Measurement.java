@@ -1,9 +1,9 @@
 package com.pivotal.cloudfoundry.monitoring.hyperic;
 
+import java.util.logging.Logger;
+
 import javax.management.AttributeNotFoundException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hyperic.hq.product.MeasurementPlugin;
 import org.hyperic.hq.product.Metric;
 import org.hyperic.hq.product.MetricNotFoundException;
@@ -13,11 +13,11 @@ import org.hyperic.hq.product.PluginException;
 
 public class Measurement extends MeasurementPlugin {
 
-    private static Log log = LogFactory.getLog(Measurement.class.getName());
+    private static Logger log = Logger.getLogger(Measurement.class.getName());
     
     @Override
     public MetricValue getValue(Metric metric) throws PluginException, MetricNotFoundException, MetricUnreachableException {
-        log.debug("[getValue]metric" + metric);
+        log.info("[getValue]metric" + metric);
         MetricValue metricValue = null;
         
         if (metric.isAvail()){
@@ -33,7 +33,7 @@ public class Measurement extends MeasurementPlugin {
 				return new MetricValue(Metric.AVAIL_DOWN);
 				
 			} catch (AttributeNotFoundException e) {
-				log.warn("Attribute HEALTHY not found for " + property+". Assuming its available");
+				log.warning("Attribute HEALTHY not found for " + property+". Assuming its available");
 				return new MetricValue(Metric.AVAIL_UP);
 				//e.printStackTrace();
 			} catch (Exception e) {
@@ -47,9 +47,9 @@ public class Measurement extends MeasurementPlugin {
         if (!metric.toString().startsWith("org.cloudfoundry")) return new MetricValue(1d);
         else{
 	        try{
-	        	log.debug(">>>>WILL GET VALUE VALUE OF METRIC: " + metric);
+	        	log.info(">>>>WILL GET VALUE VALUE OF METRIC: " + metric);
 	        	double value = JMXClient.getInstance().getPropertyValue(metric.toString());
-	        	log.debug(">>>>VALUE IS: " + value);
+	        	log.info(">>>>VALUE IS: " + value);
 	        	
 	        	metricValue = new MetricValue(value); 
 	        }

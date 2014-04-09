@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Logger;
 
 import javax.management.AttributeNotFoundException;
 import javax.management.InstanceNotFoundException;
@@ -20,15 +21,13 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.pivotal.cloudfoundry.monitoring.hyperic.services.CFService;
 
 public class JMXClient {
 
 	MBeanServerConnection conn;
-    private static Log log = LogFactory.getLog(JMXClient.class);
+    private static Logger log = Logger.getLogger(JMXClient.class.getName());
 	private static JMXClient instance = null;
 	
     private JMXClient(){
@@ -96,18 +95,18 @@ public class JMXClient {
 	    			CFService cfService = (CFService) Class.forName(CFService.class.getPackage().getName()+"."+serviceKindClassname).newInstance();    			
 	    			cfService.setIndex(Integer.parseInt(obj.getKeyProperty("index")));
 	    			cfService.setIp(obj.getKeyProperty("ip"));    			
-	    	    	log.debug("Found CloudFoundry service: "+serviceKind+" "+cfService.getIndex());    			
+	    	    	log.info("Found CloudFoundry service: "+serviceKind+" "+cfService.getIndex());    			
 	    			cfServices.add(cfService);
     			}
     			catch(ClassNotFoundException e){
-    				log.warn("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
+    				log.warning("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
     				System.out.println("Found CloudFoundry service: "+serviceKind+" but there's no class declared on the plugin for handling it called "+serviceKindClassname);
     			}
     		}
     		return cfServices;
     	}
 		catch(Exception e){
-			log.error("ERROR while getting CF Services using JMX: "+e.getMessage());
+			log.severe("ERROR while getting CF Services using JMX: "+e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

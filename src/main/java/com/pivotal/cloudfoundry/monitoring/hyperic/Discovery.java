@@ -4,9 +4,8 @@ package com.pivotal.cloudfoundry.monitoring.hyperic;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hyperic.hq.product.AutoServerDetector;
 import org.hyperic.hq.product.PluginException;
 import org.hyperic.hq.product.ServerDetector;
@@ -19,7 +18,7 @@ import com.pivotal.cloudfoundry.monitoring.hyperic.services.CFService;
 
 public class Discovery extends ServerDetector implements AutoServerDetector {
 
-    private static Log log = LogFactory.getLog(Discovery.class);
+    private static Logger log = Logger.getLogger(Discovery.class.getName());
 
     public List getServerResources(ConfigResponse platformConfig) throws PluginException {
         
@@ -58,7 +57,7 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
     	//password="password";
     	
     	if (jmxURL==null || username==null || password==null){
-    		log.warn("JMX conn parameters are null");
+    		log.warning("JMX conn parameters are null");
     		serverConfig.setValue("Availability", false);
 			return new ArrayList();
     	}
