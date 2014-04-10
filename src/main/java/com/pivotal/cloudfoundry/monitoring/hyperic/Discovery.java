@@ -56,12 +56,12 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
     	//jmxURL="service:jmx:rmi:///jndi/rmi://10.103.44.105:44444/jmxrmi";
     	//username="admin";
     	//password="password";
-    	
+    	/*
     	if (jmxURL==null || username==null || password==null){
     		log.warn("JMX conn parameters are null");
     		serverConfig.setValue("Availability", false);
 			return new ArrayList();
-    	}
+    	}*/
     	
     	JMXClient client = JMXClient.getInstance();
     	try {
