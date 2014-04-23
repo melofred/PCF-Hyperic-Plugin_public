@@ -95,6 +95,7 @@ public class JMXClient {
     			try{
 	    			CFService cfService = (CFService) Class.forName(CFService.class.getPackage().getName()+"."+serviceKindClassname).newInstance();    			
 	    			cfService.setIndex(Integer.parseInt(obj.getKeyProperty("index")));
+	    			cfService.setIp(obj.getKeyProperty("ip"));
 	    			log.info("Found CloudFoundry service: "+serviceKind+" id: "+cfService.getIndex());    			
 	    			cfServices.add(cfService);
     			}

@@ -148,6 +148,78 @@
 			            
         </service>
                 
+       <service name="LoggregatorDeaAgent">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorDeaAgent,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>                
+                
+       <service name="LoggregatorServer">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorServer,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>
+             
+        <service name="LoggregatorTrafficcontroller">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=LoggregatorTrafficcontroller,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>                           
+
+             
+        <service name="collector">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=collector,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>
+        
+       <service name="saml_login">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=saml_login,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>              
+       <service name="uaa">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=uaa,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			            
+        </service>              
+        
         <!--
         	
         	SERVICES BELOW BASED ON THE "NULL" JMX TREE. COMMENTED FOR PRIORITIZING THE SERVICES ON "UNTITLED_DEV" TREE
