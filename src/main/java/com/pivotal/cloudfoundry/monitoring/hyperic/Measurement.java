@@ -26,7 +26,7 @@ public class Measurement extends MeasurementPlugin {
         			return new MetricValue(Metric.AVAIL_UP);
         		else return new MetricValue(Metric.AVAIL_DOWN);
         	}
-        	String property = metric.toString().replaceAll("Availability", "system.healthy");
+        	String property = metric.toString().replaceAll("Availability", "healthy");
         	try {
 				double up = JMXClient.getInstance().getPropertyValue(property);
 				if (up>0) return new MetricValue(Metric.AVAIL_UP);

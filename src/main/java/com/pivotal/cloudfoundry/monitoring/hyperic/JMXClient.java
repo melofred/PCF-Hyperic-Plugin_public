@@ -82,9 +82,9 @@ public class JMXClient {
 		List<CFService> cfServices = new ArrayList<CFService>();
 		
     	try{
-	    	log.info("Querying CF available services... using query: org.cloudfoundry:deployment=null,job=*,index=*,*");
+	    	log.info("Querying CF available services... using query: org.cloudfoundry:deployment=untitled_dev,job=*,index=*,*");
 
-    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=null,job=*,index=*,*"), null)).iterator();
+    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=untitled_dev,job=*,index=*,*"), null)).iterator();
     		while (names.hasNext()){
     			ObjectName obj = names.next();
     			
@@ -116,15 +116,15 @@ public class JMXClient {
 	}
 	
 	/*
-	public List<Dea> getDeas(){
+	public List<DEA> getDeas(){
 		
-		List<Dea> deas = new ArrayList<Dea>();
+		List<DEA> deas = new ArrayList<DEA>();
 		
     	try{
-    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=untitled_dev,job=Dea,index=*,ip=*"), null)).iterator();
+    		Iterator<ObjectName> names = new TreeSet<ObjectName> (conn.queryNames(new ObjectName("org.cloudfoundry:deployment=untitled_dev,job=DEA,index=*,ip=*"), null)).iterator();
     		while (names.hasNext()){
     			ObjectName obj = names.next();
-    			Dea dea = new Dea();
+    			DEA dea = new DEA();
     			dea.setIndex(Integer.parseInt(obj.getKeyProperty("index")));
     			dea.setIp(obj.getKeyProperty("ip"));
     			deas.add(dea);
@@ -159,7 +159,7 @@ public class JMXClient {
                 //new TreeSet<ObjectName>(client.conn.queryNames(null, null));
             		//org.cloudfoundry:deployment=null,job=*,index=*,ip=null
             		
-            	new TreeSet<ObjectName>(client.conn.queryNames(new ObjectName("org.cloudfoundry:deployment=null,job=*,index=*,*"), null));	
+            	new TreeSet<ObjectName>(client.conn.queryNames(new ObjectName("org.cloudfoundry:deployment=untitled_dev,job=*,index=*,*"), null));	
             for (ObjectName name : names) {
                 echo("\tObjectName = " + name);
             }				
@@ -169,7 +169,7 @@ public class JMXClient {
                 echo("\tService = " + svc.getClass().getSimpleName()+" "+svc.getIndex()+" : "+svc.getIp());
             }			        
             
- //           echo("Property value for org.cloudfoundry:deployment=untitled_dev,job=Dea,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"+client.getPropertyValue("org.cloudfoundry:deployment=untitled_dev,job=Dea,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"));
+ //           echo("Property value for org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"+client.getPropertyValue("org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"));
             
 			
 		} catch (Exception e) {

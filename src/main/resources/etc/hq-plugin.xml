@@ -6,23 +6,155 @@
         <plugin type="measurement" class="com.pivotal.cloudfoundry.monitoring.hyperic.Measurement"/>
 
         <config>
-            <option name="process.ID" description="PID" default="1" optional="false"/>     
-            <option name="JMX URL" description="JMX URL of Loggregator " default="service:jmx:rmi:///jndi/rmi://localhost:44444/jmxrmi" optional="false"/>     
+            <option name="JMX URL" description="JMX URL of Ops Metrics " default="service:jmx:rmi:///jndi/rmi://localhost:44444/jmxrmi" optional="false"/>     
             <option name="Username" description="JMX Username " default="admin" optional="false"/>     
             <option name="Password" description="JMX Password " default="password" optional="false"/>     
         </config>
 
-		
-
         <property name="template" value="CF:${alias}" />
         <metric name="Availability" alias="Availability" indicator="true" />
+     
+     
+     
+        <service name="CloudController">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=CloudController,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
             
+			<metric name="HTTP Status 1xx" indicator="true" category="THROUGHPUT" alias="cc.http_status.1XX" />
+			<metric name="HTTP Status 2xx" indicator="true" category="THROUGHPUT" alias="cc.http_status.2XX" />
+			<metric name="HTTP Status 3xx" indicator="true" category="THROUGHPUT" alias="cc.http_status.3XX" />
+			<metric name="HTTP Status 4xx" indicator="true" category="THROUGHPUT" alias="cc.http_status.4XX" />
+			<metric name="HTTP Status 5xx" indicator="true" category="THROUGHPUT" alias="cc.http_status.5XX" />
+
+			<metric name="Job Queue Length (generic)" indicator="true" category="THROUGHPUT" alias="cc.job_queue_length.cc-generic" />
+			<metric name="Requests Completed" indicator="true" category="THROUGHPUT" alias="cc.requests.completed" />
+			<metric name="Requests Outstanding" indicator="true" category="THROUGHPUT" alias="cc.requests.outstanding" />
+			
+			<metric name="CPU Load Avg" indicator="true" category="THROUGHPUT" alias="cpu_load_avg"/>
+
+			<metric name="Memory" indicator="true" category="THROUGHPUT" alias="mem" />
+			<metric name="Memory Free Bytes" indicator="true" category="THROUGHPUT" alias="mem_free_bytes"/>
+			<metric name="Memory Used Bytes" indicator="true" category="THROUGHPUT" alias="mem_used_bytes"/>
+
+			<metric name="Total Users" indicator="true" category="THROUGHPUT" alias="total_users"/>
+
+
+			<metric name="Uptime (sec)" indicator="true" category="THROUGHPUT" alias="cc.uptime"/>
+            
+        </service>
+     
+            
+        <service name="DEA">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=DEA,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			<metric name="Avaliable Disk Ratio" indicator="true" category="THROUGHPUT" alias="available_disk_ratio[stack=lucid64]" />
+
+			<metric name="Can Stage" indicator="true" category="THROUGHPUT" alias="can_stage[stack=lucid64]" />
+			<metric name="Reservable Stagers" indicator="true" category="THROUGHPUT" alias="reservable_stagers[stack=lucid64]" />
+			
+			<metric name="CPU Load Avg" indicator="true" category="THROUGHPUT" alias="cpu_load_avg[stack=lucid64]"/>
+
+			<metric name="Avaliable Memory Ratio" indicator="true" category="THROUGHPUT" alias="available_memory_ratio[stack=lucid64]" />
+			<metric name="Memory Free Bytes" indicator="true" category="THROUGHPUT" alias="mem_free_bytes[stack=lucid64]"/>
+			<metric name="Memory Used Bytes" indicator="true" category="THROUGHPUT" alias="mem_used_bytes[stack=lucid64]"/>
+
+			<metric name="Registry: born" indicator="true" category="THROUGHPUT" alias="dea_registry_born[stack=lucid64]"/>
+			<metric name="Registry: crashed" indicator="true" category="THROUGHPUT" alias="dea_registry_crashed[stack=lucid64]"/>
+			<metric name="Registry: deleted" indicator="true" category="THROUGHPUT" alias="dea_registry_deleted[stack=lucid64]"/>
+			<metric name="Registry: resuming" indicator="true" category="THROUGHPUT" alias="dea_registry_resuming[stack=lucid64]"/>
+			<metric name="Registry: running" indicator="true" category="THROUGHPUT" alias="dea_registry_running[stack=lucid64]"/>
+			<metric name="Registry: starting" indicator="true" category="THROUGHPUT" alias="dea_registry_starting[stack=lucid64]"/>
+			<metric name="Registry: stopping" indicator="true" category="THROUGHPUT" alias="dea_registry_stopping[stack=lucid64]"/>
+			<metric name="Registry: stopped" indicator="true" category="THROUGHPUT" alias="dea_registry_stopped[stack=lucid64]"/>
+
+
+			<metric name="Uptime (sec)" indicator="true" category="THROUGHPUT" alias="uptime_in_seconds[stack=lucid64]"/>
+            
+        </service>
+           
+            
+        <service name="HM9000">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=HM9000,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			<metric name="Actual State Listener Store Usage %" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.ActualStateListenerStoreUsagePercentage" />
+			<metric name="Desired State Sync Time (ms)" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.DesiredStateSyncTimeInMilliseconds" />
+			<metric name="Number of Apps with all instances reporting" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfAppsWithAllInstancesReporting" />
+			<metric name="Number of Apps with missing instances reporting" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfAppsWithMissingInstances" />
+			
+
+			<metric name="Number of crashed indices" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfCrashedIndices" />
+			<metric name="Number of crashed instances" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfCrashedInstances" />
+			<metric name="Number of desired apps" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfDesiredApps" />
+			<metric name="Number of desired apps pending staging" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfDesiredAppsPendingStaging" />
+			<metric name="Number of desired instances" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfDesiredInstances" />
+			<metric name="Number of missing indices" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfMissingIndices" />
+			<metric name="Number of running instances" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfRunningInstances" />
+			<metric name="Number of undesired running apps" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.NumberOfUndesiredRunningApps" />
+			
+			<metric name="Received Heartbeats" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.ReceivedHeartbeats" />
+			<metric name="Saved Heartbeats" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.SavedHeartbeats" />
+			<metric name="Start Crashed" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StartCrashed" />
+			<metric name="Start Evacuating" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StartEvacuating" />
+			<metric name="Start Missing" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StartMissing" />
+			<metric name="Stop Duplicate" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StopDuplicate" />
+			<metric name="Stop Evacuation Complete" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StopEvacuationComplete" />
+			<metric name="Stop Extra" indicator="true" category="THROUGHPUT" alias="HM9000.HM9000.StopExtra" />
+
+			<metric name="Memory: Last GC Pause Time(ns)" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.lastGCPauseTimeNS" />
+			<metric name="Memory: Number of bytes allocated" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.numBytesAllocated" />
+			<metric name="Memory: Number of bytes allocated (Heap)" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.numBytesAllocatedHeap" />
+			<metric name="Memory: Number of bytes allocated (Stack)" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.numBytesAllocatedStack" />
+			<metric name="Memory: Num Frees" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.numFrees" />
+			<metric name="Memory: Num Mallocs" indicator="true" category="THROUGHPUT" alias="HM9000.memoryStats.numMallocs" />
+
+			<metric name="Num CPUs" indicator="true" category="THROUGHPUT" alias="HM9000.numCpus" />
+			<metric name="Num Go Routines" indicator="true" category="THROUGHPUT" alias="HM9000.numGoRoutines" />
+
+			            
+        </service>
+           
+        <service name="Router">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+                <option name="service.IP" description="Service IP" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=untitled_dev,job=Router,index=%service.ID%,ip=%service.IP%:${alias}" />
+
+            <metric name="Availability" indicator="true" />
+            
+			<metric name="Memory" indicator="true" category="THROUGHPUT" alias="mem" />
+			<metric name="Routing: Bad Gateways" indicator="true" category="THROUGHPUT" alias="router.bad_gateways" />
+			<metric name="Routing: Bad Requests" indicator="true" category="THROUGHPUT" alias="router.bad_requests" />
+			<metric name="Routing: Total Requests" indicator="true" category="THROUGHPUT" alias="router.total_requests" />
+			<metric name="Routing: Total Routes" indicator="true" category="THROUGHPUT" alias="router.total_routes" />
+
+			            
+        </service>
+                
+        <!--
+        	
+        	SERVICES BELOW BASED ON THE "NULL" JMX TREE. COMMENTED FOR PRIORITIZING THE SERVICES ON "UNTITLED_DEV" TREE
+        	    
         <service name="Dea">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
-                <!--
-                <option name="service.IP" description="Service IP"  optional="false"/>
-                -->
             </config>
             <property name="template" value="org.cloudfoundry:deployment=null,job=dea,index=%service.ID%,ip=null:${alias}" />
             <metric name="Availability" indicator="true" />
@@ -326,7 +458,7 @@
          
         </service>             
                 
-                           
+         -->                  
         <help>
             This is a HTML help piece that will be displayed to the user on the server configuration page to help him with the configuration of the resource or the configuration of the product if is needed.
         </help>

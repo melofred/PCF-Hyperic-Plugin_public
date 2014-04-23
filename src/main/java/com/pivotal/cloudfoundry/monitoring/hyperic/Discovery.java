@@ -80,7 +80,7 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
     	
     	
     	
-    	// HERE USE JMX CONN TO PULL JMX SERVICES AVAILABLE (Dea, HEALTH MANAGER, HA PROXY, ROUTER, ...) AND SHOW THEM
+    	// HERE USE JMX CONN TO PULL JMX SERVICES AVAILABLE (DEA, HEALTH MANAGER, HA PROXY, ROUTER, ...) AND SHOW THEM
     	
     	
     	List<ServiceResource> services = new ArrayList<ServiceResource>();
