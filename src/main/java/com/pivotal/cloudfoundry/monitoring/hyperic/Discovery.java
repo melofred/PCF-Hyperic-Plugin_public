@@ -32,7 +32,7 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
             ServerResource server = createServerResource("Remote PCF");
             server.setName(server.getName());
             ConfigResponse productConfig = new ConfigResponse();
-            productConfig.setValue("process.ID", i);
+           // productConfig.setValue("process.ID", i);
             setProductConfig(server, productConfig);
             setMeasurementConfig(server, new ConfigResponse());
             servers.add(server);
@@ -56,12 +56,12 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
     	//jmxURL="service:jmx:rmi:///jndi/rmi://10.103.44.105:44444/jmxrmi";
     	//username="admin";
     	//password="password";
-    	
+    	/*
     	if (jmxURL==null || username==null || password==null){
     		log.warn("JMX conn parameters are null");
     		serverConfig.setValue("Availability", false);
 			return new ArrayList();
-    	}
+    	}*/
     	
     	JMXClient client = JMXClient.getInstance();
     	try {
@@ -93,10 +93,10 @@ public class Discovery extends ServerDetector implements AutoServerDetector {
             service.setName(cfService.getClass().getSimpleName() + " " + cfService.getIndex());
             ConfigResponse productConfig = new ConfigResponse();
             productConfig.setValue("service.ID", cfService.getIndex());
-            productConfig.setValue("service.IP", cfService.getIp());
             setProductConfig(service, productConfig);
             setMeasurementConfig(service, new ConfigResponse());
             services.add(service);    		
+            log.info("Added service: "+service.getType()+" service.ID "+cfService.getIndex());
     	}
     	
     	log.info("Returning services #: "+services.size());

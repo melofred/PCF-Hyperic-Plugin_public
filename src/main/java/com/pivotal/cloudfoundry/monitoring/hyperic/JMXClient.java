@@ -95,8 +95,7 @@ public class JMXClient {
     			try{
 	    			CFService cfService = (CFService) Class.forName(CFService.class.getPackage().getName()+"."+serviceKindClassname).newInstance();    			
 	    			cfService.setIndex(Integer.parseInt(obj.getKeyProperty("index")));
-	    			cfService.setIp(obj.getKeyProperty("ip"));    			
-	    	    	log.debug("Found CloudFoundry service: "+serviceKind+" "+cfService.getIndex());    			
+	    			log.info("Found CloudFoundry service: "+serviceKind+" id: "+cfService.getIndex());    			
 	    			cfServices.add(cfService);
     			}
     			catch(ClassNotFoundException e){
@@ -169,8 +168,7 @@ public class JMXClient {
                 echo("\tService = " + svc.getClass().getSimpleName()+" "+svc.getIndex()+" : "+svc.getIp());
             }			        
             
- //           echo("Property value for org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"+client.getPropertyValue("org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"));
-            
+            echo("Property value for org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"+client.getPropertyValue("org.cloudfoundry:deployment=untitled_dev,job=DEA,index=1,ip=10.103.44.23:available_disk_ratio[stack=lucid64]"));            
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -6,11 +6,10 @@
         <plugin type="measurement" class="com.pivotal.cloudfoundry.monitoring.hyperic.Measurement"/>
 
         <config>
-            <option name="JMX URL" description="JMX URL of Ops Metrics " default="service:jmx:rmi:///jndi/rmi://localhost:44444/jmxrmi" optional="false"/>     
-            <option name="Username" description="JMX Username " default="admin" optional="false"/>     
-            <option name="Password" description="JMX Password " default="password" optional="false"/>     
-        </config>
-
+            <option name="JMX URL" description="JMX URL of Ops Metrics " default="service:jmx:rmi:///jndi/rmi://localhost:44444/jmxrmi" optional="false" />
+            <option name="Username" description="JMX Username " default="admin" optional="false"/>
+			<option name="Password" description="JMX Password " default="password" optional="false"/>     
+		</config>
         <property name="template" value="CF:${alias}" />
         <metric name="Availability" alias="Availability" indicator="true" />
      
@@ -205,6 +204,88 @@
         </service>        
 
         <service name="Health_manager">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=health_manager,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="system.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="system.swap.kb"/>
+           
+         
+        </service>     
+        
+        <service name="Nats">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=health_manager,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="system.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="system.swap.kb"/>
+           
+         
+        </service>     
+        
+        <service name="Etcd">
+            <config>
+                <option name="service.ID" description="Service Id" default="0" optional="false"/>
+            </config>
+            <property name="template" value="org.cloudfoundry:deployment=null,job=health_manager,index=%service.ID%,ip=null:${alias}" />
+            <metric name="Availability" indicator="true" />
+           
+			<metric name="Disk System Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.percent" />
+			<metric name="Disk System INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.system.inode_percent" />
+			<metric name="Disk Ephemeral Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.percent" />
+			<metric name="Disk Ephemeral INode Percent" indicator="true" category="THROUGHPUT" alias="system.disk.ephemeral.inode_percent" />
+			
+			<metric name="CPU Sys" indicator="true" category="THROUGHPUT" alias="system.cpu.sys"/>
+			<metric name="CPU User" indicator="true" category="THROUGHPUT" alias="system.cpu.user"/>
+			<metric name="CPU Wait" indicator="true" category="THROUGHPUT" alias="system.cpu.wait"/>
+
+			<metric name="Load" indicator="true" category="THROUGHPUT" alias="system.load.1m"/>
+
+			<metric name="Mem Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.mem.percent"/>
+			<metric name="Mem Usage Kb" indicator="true" category="THROUGHPUT" alias="system.mem.kb"/>
+			
+			<metric name="Swap Usage Percentage" indicator="true" category="THROUGHPUT" alias="system.swap.percent"/>
+			<metric name="Swap Usage Kb" indicator="true" category="THROUGHPUT" alias="system.swap.kb"/>
+           
+         
+        </service>     
+
+        
+        <service name="Ha_proxy">
             <config>
                 <option name="service.ID" description="Service Id" default="0" optional="false"/>
             </config>
